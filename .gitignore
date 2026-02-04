@@ -1,1 +1,13 @@
-nul
+# Ignore everything by default
+*
+
+# Allow .gitignore itself
+!.gitignore
+
+# Allow the plugin folder and all its contents
+!vietcong_bes/
+!vietcong_bes/**
+
+# Exclude __pycache__ and .pyc everywhere
+__pycache__/
+*.pyc
