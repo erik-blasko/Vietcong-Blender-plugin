@@ -846,6 +846,7 @@ class BESImporter:
             # Store object type info
             obj['bes_object_type'] = obj_type
             obj['bes_original_prefix'] = prefix
+            obj['bes_source_file'] = os.path.splitext(os.path.basename(self.bes_file.filepath or ''))[0]
 
             # Store import order for roundtrip export
             obj['bes_import_order'] = self._object_order
