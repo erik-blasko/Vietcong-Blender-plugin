@@ -15,6 +15,10 @@ import json
 from mathutils import Vector, Matrix, Euler
 from typing import Dict, Optional, List
 
+# Blender 4.3+ removed EEVEE Legacy material properties (blend_method, shadow_method, show_transparent_back).
+# In EEVEE Next, transparency is handled automatically via the Principled BSDF Alpha input.
+_LEGACY_EEVEE = bpy.app.version < (4, 3, 0)
+
 from ..core.bes_reader import read_bes_file
 from ..core.bes_types import (
     BESFile,
@@ -313,7 +317,8 @@ class BESImporter:
             # Handle transparency
             if bes_mat.is_transparent or bes_mat.mat_opacity < 100:
                 needs_alpha = True
-                mat.blend_method = 'BLEND'
+                if _LEGACY_EEVEE:
+                    mat.blend_method = 'BLEND'
                 principled.inputs['Alpha'].default_value = bes_mat.mat_opacity / 100.0
 
             # Handle two-sided
@@ -388,7 +393,8 @@ class BESImporter:
             # Handle transparency
             if bes_mat.is_transparent or bes_mat.mat_opacity < 100:
                 needs_alpha = True
-                mat.blend_method = 'BLEND'
+                if _LEGACY_EEVEE:
+                    mat.blend_method = 'BLEND'
                 principled.inputs['Alpha'].default_value = bes_mat.mat_opacity / 100.0
 
             # Handle two-sided
@@ -484,9 +490,10 @@ class BESImporter:
 
                 # Set up alpha blending if needed
                 if needs_alpha or has_alpha:
-                    mat.blend_method = 'BLEND'
-                    mat.shadow_method = 'CLIP'
-                    mat.show_transparent_back = True
+                    if _LEGACY_EEVEE:
+                        mat.blend_method = 'BLEND'
+                        mat.shadow_method = 'CLIP'
+                        mat.show_transparent_back = True
 
                     # Connect alpha
                     links.new(tex_node.outputs['Alpha'], principled.inputs['Alpha'])
@@ -582,9 +589,10 @@ class BESImporter:
                 tex_node.location = (-300, -200)
 
                 # Set up alpha blending
-                mat.blend_method = 'BLEND'
-                mat.shadow_method = 'CLIP'
-                mat.show_transparent_back = True
+                if _LEGACY_EEVEE:
+                    mat.blend_method = 'BLEND'
+                    mat.shadow_method = 'CLIP'
+                    mat.show_transparent_back = True
 
                 # Connect alpha output to principled alpha input
                 links.new(tex_node.outputs['Color'], principled.inputs['Alpha'])
@@ -838,6 +846,7 @@ class BESImporter:
             # Store object type info
             obj['bes_object_type'] = obj_type
             obj['bes_original_prefix'] = prefix
+            obj['bes_source_file'] = os.path.splitext(os.path.basename(self.bes_file.filepath or ''))[0]
 
             # Store import order for roundtrip export
             obj['bes_import_order'] = self._object_order

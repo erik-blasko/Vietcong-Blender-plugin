@@ -15,14 +15,14 @@ Features:
 
 bl_info = {
     "name": "Vietcong BES Format",
-    "author": "Vietcong Blender Tools Contributors",
+    "author": "Erik Blasko (fork of desintegrathor's plugin)",
     "version": (1, 0, 0),
     "blender": (4, 0, 0),
     "location": "File > Import/Export > Vietcong BES (.bes)",
     "description": "Import and Export Vietcong BES model files",
     "warning": "",
-    "doc_url": "https://github.com/OpenVietcong/Blender_vietcong",
-    "tracker_url": "https://github.com/OpenVietcong/Blender_vietcong/issues",
+    "doc_url": "https://github.com/erik-blasko/Vietcong-Blender-plugin",
+    "tracker_url": "https://github.com/erik-blasko/Vietcong-Blender-plugin/issues",
     "category": "Import-Export",
 }
 
