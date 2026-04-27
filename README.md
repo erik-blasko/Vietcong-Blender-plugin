@@ -24,18 +24,10 @@ Import/export plugin for Vietcong BES model files (Blender 4.x / 5.x).
 - **Import Animation**: File > Import > Vietcong STG Animation (.stg)
 - **Export Animation**: File > Export > Vietcong STG Animation (.stg)
 
-## Companion Addon
-
-This plugin works together with [Mesh Enhance Tools (MET)](https://github.com/erik-blasko/mesh-enhance-tools) — an AI-powered mesh enhancement toolkit for Blender that provides:
-- Multi-view rendering and AI texture enhancement
-- Texture baking from renders (projection method)
-- Animation browser with 400+ game animations
-- Model pipeline management (Original → AI Enhanced → UE5 Ready)
-
 ## Credits
 
 - **Original plugin**: [desintegrathor](https://github.com/desintegrathor/Vietcong-Blender-plugin) — initial BES import/export implementation
-- **Fork maintainer**: [Erik Blasko](https://github.com/erik-blasko) — extended features, Blender 5.x compatibility, STG/STO support, export, materials
+- **Contributors**: [Erik Blasko](https://github.com/erik-blasko) — Blender 5.x compatibility, STG/STO support, export, materials
 - **Vietcong game**: Ptero-Engine-II by Pterodon / Illusion Softworks (2003)
 
 ## License
